@@ -1,38 +1,276 @@
+/* General Body and Container Styles */
 body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 20px;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        h1, h2, h3 {
-            color: #0056b3;
-        }
-        .pitch {
-            font-style: italic;
-            color: #555;
-            border-left: 5px solid #0056b3;
-            padding-left: 10px;
-            margin: 20px 0;
-        }
-        .current-time {
-            text-align: right;
-            font-size: 0.9em;
-            color: #666;
-            margin-top: 30px;
-        }
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-            color: #888;
-        }
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    color: #333; /* Default text color for light mode */
+    background-color: #f4f4f4; /* Default background for light mode */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for theme change */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align content to the top */
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 900px;
+    width: 90%;
+    margin: 40px auto;
+    background-color: #ffffff; /* Container background for light mode */
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeIn 1s ease-out; /* Main container animation */
+}
+
+/* Typography */
+h1, h2 {
+    color: #0056b3; /* Primary blue for headings */
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+h1 {
+    font-size: 2.8em;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e0e0e0;
+    animation: slideInFromTop 0.8s ease-out;
+}
+
+h2 {
+    font-size: 2em;
+    color: #007bff; /* Secondary blue for section headings */
+    border-bottom: 1px dashed #e0e0e0;
+    padding-bottom: 10px;
+    margin-top: 30px;
+    animation: slideInFromLeft 0.8s ease-out;
+}
+
+p {
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+strong {
+    color: #0056b3;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* Section Styling */
+section {
+    padding: 25px 0;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 25px;
+}
+
+section:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+/* Specific Section Animations */
+.bio p {
+    animation: fadeIn 1.5s ease-out forwards;
+    opacity: 0;
+    animation-delay: 0.2s;
+}
+
+.pitch p {
+    animation: fadeIn 1.5s ease-out forwards;
+    opacity: 0;
+    animation-delay: 0.4s;
+}
+
+.professional-bio p {
+    animation: fadeIn 1.5s ease-out forwards;
+    opacity: 0;
+    animation-delay: 0.6s;
+}
+
+/* Footer Styling */
+footer {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+    font-size: 0.9em;
+    color: #666;
+    animation: fadeIn 2s ease-out;
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    color: #e0e0e0; /* Light text for dark mode */
+    background-color: #2b2b2b; /* Dark background */
+}
+
+body.dark-mode .container {
+    background-color: #3a3a3a; /* Darker container background */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode strong {
+    color: #78c0ff; /* Lighter blue for headings in dark mode */
+}
+
+body.dark-mode a {
+    color: #a0d8ff;
+}
+
+body.dark-mode a:hover {
+    color: #78c0ff;
+}
+
+body.dark-mode header,
+body.dark-mode section,
+body.dark-mode footer {
+    border-color: #555; /* Darker borders */
+}
+
+body.dark-mode footer {
+    color: #aaa;
+}
+
+/* Theme Toggle Button */
+#theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5em;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    z-index: 1000; /* Ensure it stays on top */
+}
+
+#theme-toggle:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+#theme-toggle .icon {
+    display: none; /* Hide both by default */
+    animation: rotateIn 0.5s ease-out;
+}
+
+#theme-toggle .sun {
+    display: block; /* Show sun in light mode */
+}
+
+body.dark-mode #theme-toggle .sun {
+    display: none; /* Hide sun in dark mode */
+}
+
+body.dark-mode #theme-toggle .moon {
+    display: block; /* Show moon in dark mode */
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInFromTop {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromLeft {
+    from {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes rotateIn {
+    from {
+        transform: rotate(-180deg) scale(0.5);
+        opacity: 0;
+    }
+    to {
+        transform: rotate(0deg) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        margin: 20px auto;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    h2 {
+        font-size: 1.6em;
+    }
+
+    p {
+        font-size: 1em;
+    }
+
+    #theme-toggle {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2em;
+        top: 15px;
+        right: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    h2 {
+        font-size: 1.4em;
+    }
+
+    p {
+        font-size: 0.95em;
+    }
+}
